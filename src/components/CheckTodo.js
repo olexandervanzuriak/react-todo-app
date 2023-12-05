@@ -2,7 +2,7 @@ import { Checkbox } from 'antd';
 
 
 const CheckToDo = (props) => {
-    return (<Checkbox>{props.text}</Checkbox>);
+    return (<Checkbox id={props.id} onChange={props.onChange}>{props.text}</Checkbox>);
 }
 
 export default CheckToDo;
