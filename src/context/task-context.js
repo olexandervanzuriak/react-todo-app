@@ -6,7 +6,12 @@ export const TaskContextProvider = (props) => {
     const [taskItems, setTaskItems] = useState([{id: 1, text: "task1"}, {id: 2, text: "task2"}]);
 
     const addTask = (task) => {
-        setTaskItems((prev) => ([...prev, {id: taskItems[taskItems.length - 1].id + 1, text: task}]))
+        if (taskItems.length === 0) {
+            console.log(taskItems.length);
+            setTaskItems([{id: 1, text: task}]);
+        } else {
+            setTaskItems((prev) => ([...prev, {id: taskItems[taskItems.length - 1].id + 1, text: task}]))
+        }
     }
 
     const removeTask = (id) => {

@@ -2,13 +2,15 @@ import { useContext, useState } from 'react';
 import { TaskContext } from '../../context/task-context';
 import { Input } from 'antd';
 
-export const TaskForm = () => {
+export const TaskForm = (props) => {
     const [enteredTask, setEnteredTask] = useState();
 
     const {addTask} = useContext(TaskContext);
 
     const submit = () => {
         addTask(enteredTask);
+        setEnteredTask("");
+        props.show();
     }
 
     const TaskChanger = (event) => {

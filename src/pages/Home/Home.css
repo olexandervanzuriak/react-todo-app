@@ -1,3 +1,13 @@
+.tasks_box {
+    display: flex;
+    justify-content: center;
+}
+
 .submit_button {
     color: blue;
 }
+
+p {
+    /* Center horizontally*/
+    text-align: center;
+  }
