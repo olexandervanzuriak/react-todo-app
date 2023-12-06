@@ -5,11 +5,9 @@ import CheckToDo from "../../components/CheckTodo";
 import { Layout, Card, Button } from "antd";
 import "./Home.css";
 
-const { Header } = Layout;
-
 export const Home = () => {
   const { taskItems, removeTask } = useContext(TaskContext);
-  const [ showInput, setShowInput ] = useState(false);
+  const [showInput, setShowInput] = useState(false);
 
   const currentDate = new Date();
   const daysOfWeek = [
@@ -42,18 +40,24 @@ export const Home = () => {
 
   const doneTask = (event) => {
     removeTask(event.target.id);
-    console.log("Hello");
   };
 
   const showInputChanger = () => {
-    console.log("dfdsfdfsd");
     setShowInput(!showInput);
   };
 
   return (
     <div className="home">
-      <Header style={{ display: "flex", alignItems: "center" }}></Header>
-      <div className="tasks_box">
+      <div className="navbar">
+        <nav>
+          <a>Today</a>
+          <a>Tommorrow</a>
+          <a>Calendar</a>
+          
+          <div class="animation start-home"></div>
+        </nav>
+      </div>
+      <div className="tasks-box">
         <Card
           title={dayOfWeek}
           bordered={false}
@@ -64,20 +68,33 @@ export const Home = () => {
           <p>{month + " " + day + " " + year}</p>
           <div className="tasks">
             {taskItems.map((task) => (
-              <div key={task.id}>
+              <div className="task" key={task.id}>
                 <CheckToDo id={task.id} text={task.text} onChange={doneTask} />
                 <br />{" "}
               </div>
             ))}
           </div>
-          {!showInput &&
-          <Button type="primary" onClick={showInputChanger}>
-            Add task
-          </Button> }
+          {!showInput && (
+            <Button
+              className="add-button"
+              type="primary"
+              onClick={showInputChanger}
+            >
+              Add task
+            </Button>
+          )}
           {showInput && <TaskForm show={showInputChanger} />}
         </Card>
+      </div>
+      <div className="completed-tasks">
+        <Card
+          title={"Completed"}
+          bordered={false}
+          style={{
+            width: 300,
+          }}
+        ></Card>
       </div>
     </div>
   );
 };
- 

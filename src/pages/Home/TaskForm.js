@@ -1,26 +1,38 @@
-import { useContext, useState } from 'react';
-import { TaskContext } from '../../context/task-context';
-import { Input } from 'antd';
+import { useContext, useState } from "react";
+import { TaskContext } from "../../context/task-context";
+import { Button, Input } from "antd";
 
 export const TaskForm = (props) => {
-    const [enteredTask, setEnteredTask] = useState();
+  const [enteredTask, setEnteredTask] = useState();
 
-    const {addTask} = useContext(TaskContext);
+  const { addTask } = useContext(TaskContext);
 
-    const submit = () => {
-        addTask(enteredTask);
-        setEnteredTask("");
-        props.show();
+  const submit = () => {
+    if (enteredTask) {
+      addTask(enteredTask);
+      setEnteredTask("");
+      props.show();
+    } else {
+      props.show();
     }
+  };
 
-    const TaskChanger = (event) => {
-        setEnteredTask(event.target.value);
-    }
+  const TaskChanger = (event) => {
+    setEnteredTask(event.target.value);
+  };
 
-    return (
-        <div>
-            <Input placeholder="Enter task" value={enteredTask} onChange={TaskChanger} />
-            <button onClick={submit} className="submit_button">Submit</button>
-        </div>
-    )
-}
+  return (
+    <div className="task-form">
+        <form onSubmit={submit}>
+        <Input
+        placeholder="Enter task"
+        value={enteredTask}
+        onChange={TaskChanger}
+      />
+      <Button className="submit-button" type="primary" onClick={submit}>
+        Submit
+      </Button>
+        </form>
+    </div>
+  );
+};
