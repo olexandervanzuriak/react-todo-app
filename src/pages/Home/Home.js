@@ -53,7 +53,7 @@ export const Home = () => {
           <a>Today</a>
           <a>Tommorrow</a>
           <a>Calendar</a>
-          
+
           <div class="animation start-home"></div>
         </nav>
       </div>
@@ -67,12 +67,19 @@ export const Home = () => {
         >
           <p>{month + " " + day + " " + year}</p>
           <div className="tasks">
-            {taskItems.map((task) => (
-              <div className="task" key={task.id}>
-                <CheckToDo id={task.id} text={task.text} onChange={doneTask} />
-                <br />{" "}
-              </div>
-            ))}
+            {taskItems.map(
+              (task) =>
+                !task.complete && (
+                  <div className="task" key={task.id}>
+                    <CheckToDo
+                      id={task.id}
+                      text={task.text}
+                      onChange={doneTask}
+                    />
+                    <br />{" "}
+                  </div>
+                )
+            )}
           </div>
           {!showInput && (
             <Button
@@ -93,7 +100,20 @@ export const Home = () => {
           style={{
             width: 300,
           }}
-        ></Card>
+        >{taskItems.map(
+          (task) =>
+            task.complete && (
+              <div className="task" key={task.id}>
+                <CheckToDo
+                  id={task.id}
+                  text={task.text}
+                  onChange={doneTask}
+                  checked={task.complete}
+                />
+                <br />{" "}
+              </div>
+            )
+        )}</Card>
       </div>
     </div>
   );

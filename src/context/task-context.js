@@ -3,7 +3,8 @@ import { createContext, useState } from "react";
 export const TaskContext = createContext(null);
 
 export const TaskContextProvider = (props) => {
-    const [taskItems, setTaskItems] = useState([{id: 1, text: "task1"}, {id: 2, text: "task2"}]);
+    const [taskItems, setTaskItems] = useState([{id: 1, text: "task1", complete: false}, {id: 2, text: "task2", complete: false}]);
+    
 
     const addTask = (task) => {
         if (taskItems.length === 0) {
@@ -15,7 +16,8 @@ export const TaskContextProvider = (props) => {
     }
 
     const removeTask = (id) => {
-        setTaskItems((prev) => prev.filter((prev) => prev.id !== id));
+        taskItems[id-1].complete = true;
+        setTaskItems((prev) => ([...prev]))
         console.log(id);
     }
 
